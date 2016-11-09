@@ -6,46 +6,53 @@ var petsPath = path.join(__dirname, 'pets.json');
 
 //just variables argv parses out
 var node = path.basename(process.argv[0]);
-// console.log(process.argv);
+// console.log(process.argv[0]);
 var file = path.basename(process.argv[1]);
+// console.log(process.argv[1]);
 var cmd = process.argv[2];
-// console.log(node);
+// console.log(process.argv[2]);
 
-if (cmd === 'read') {
-  fs.readFile(petsPath, "utf8", function(err, data){
-    if  (err){
-      throw err;
-    }
-    var pets = JSON.parse(data);
-    console.log(pets);
-  });
-}
-else if (cmd ==='create') {
-  fs.readFile(petsPath, 'utf8', function(readErr, data){
-    if (readErr){
-      throw readErr;
-    }
-    var pets = JSON.parse(data);
-     var pet = process.argv[3];
-
-     if(!pet) {
-       console.error(`Usage: ${node} ${file} ${cmd} PET`);
-       process.exit(1);
-       }
-
-       pets.push(pet);
-
-        var petsJSON = JSON.stringify(pets);
-
-        fs.writeFile(petsPath, petsJSON, function(writeErr){
-          if(writeErr){
-            throw writeErr;
-          }
-          console.log(pet);
-      });
+  if (cmd === 'read') {
+    fs.readFile(petsPath, "utf8", function(err, data){
+      if  (err){
+        throw err;
+      }
+      var pets = JSON.parse(data);
+      // console.log(pets[0]);
+      // console.log(pets[1]);
     });
   }
-  else {
-    console.error(`Usage: ${node} ${file} read`);
-  process.exit(1);
-}
+  else if (cmd ==='create') {
+    fs.readFile(petsPath, 'utf8', function(readErr, data){
+      if (readErr){
+        throw readErr;
+      }
+      var pets = JSON.parse(data);
+       var pet = {
+         "age": parseInt( process.argv[3]),
+         "kind": process.argv[4],
+         "name": process.argv[5],
+       }
+
+
+       if(!pet) {
+         console.error(`Usage: ${node} ${file} ${cmd} PET`);
+         process.exit(1);
+         }
+
+         pets.push(pet);
+
+          var petsJSON = JSON.stringify(pets);
+
+          fs.writeFile(petsPath, petsJSON, function(writeErr){
+            if(writeErr){
+              throw writeErr;
+            }
+            console.log(pet);
+        });
+      });
+    }
+    else {
+      console.error(`Usage: ${node} ${file} [read | create | update | destroy]` );
+    process.exit(1);
+  }
