@@ -3,6 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 var petsPath = path.join(__dirname, 'pets.json');
+// console.log(__dirname);
 
 //just variables argv parses out
 var node = path.basename(process.argv[0]);
@@ -11,7 +12,8 @@ var file = path.basename(process.argv[1]);
 // console.log(process.argv[1]);
 var cmd = process.argv[2];
 // console.log(process.argv[2]);
-
+// console.log(typeof(Number(process.argv[3])));
+// console.log(pets.JSON);
   if (cmd === 'read') {
     fs.readFile(petsPath, "utf8", function(err, data){
       if  (err){
@@ -19,7 +21,9 @@ var cmd = process.argv[2];
       }
       var pets = JSON.parse(data);
       // console.log(pets[0]);
+      // console.log(pets[0]);
       // console.log(pets[1]);
+      // console.log(petsPath);
     });
   }
   else if (cmd ==='create') {
@@ -29,9 +33,9 @@ var cmd = process.argv[2];
       }
       var pets = JSON.parse(data);
        var pet = {
-         "age": parseInt( process.argv[3]),
-         "kind": process.argv[4],
-         "name": process.argv[5],
+         age:  Number(process.argv[3]),
+         kind: process.argv[4],
+         name: process.argv[5],
        }
 
 
