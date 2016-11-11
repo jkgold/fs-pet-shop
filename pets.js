@@ -15,16 +15,19 @@ if( cmd === 'read') {
       throw err;
     }
     var index = Number.parseInt(process.argv[3]);
-
     var pets = JSON.parse(data);
-      console.log(pets);
 
-      if (Number.isNaN(index) || index < 0 || index >= pets.length) {
+    if(Number.isNaN(index)){
+      console.log(pets);
+      process.exit();
+    }
+    console.log(pets[index]);
+
+      if (index < 0 || index >= pets.length) {
         // console.log(pets);
         console.error(`Usage: ${node} ${file} read INDEX`);
         process.exit(1);
       }
-      console.log(pets);
     });
 }
 else if
@@ -34,19 +37,21 @@ else if
           throw readErr;
         }
 
-      var pets =JSON.parse(data);
+      var pets = JSON.parse(data);
+      // var age = Number.parseInt(process.argv[3]);
       var pet = {
-        age: process.argv[3],
+        age: Number.parseInt(process.argv[3]),
         kind: process.argv[4],
         name: process.argv[5]
-
       }
+      console.log("HERE'S OUR NEW PET!", pet);
 
-      if(!pet)  {
+      // SOMETHING ISN'T WORKING HERE LIKE WE EXPECT
+      // if(!pet)  {
+      if(!pet.age || !pet.kind || !pet.name)  {
         console.error(`Usage: ${node} ${file} create AGE KIND NAME`);
         process.exit(1);
       }
-
 
       pets.push(pet);
       var petsJSON = JSON.stringify(pets);

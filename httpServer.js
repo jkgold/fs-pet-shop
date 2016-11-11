@@ -10,6 +10,7 @@ app.get('/pets', function(req, res){
     if (err){
       throw err
     }
+      res.send(JSON.parse(data));
 
   });
 });
