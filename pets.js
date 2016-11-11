@@ -8,6 +8,7 @@ var node = path.basename(process.argv[0]);
  // console.log(process.argv[0]);
  var file = path.basename(process.argv[1]);
  var cmd = process.argv[2];
+ var index = Number.parseInt(process.argv[3]);
 
 if( cmd === 'read') {
   fs.readFile(petsPath, 'utf8', function(err, data) {
@@ -17,8 +18,12 @@ if( cmd === 'read') {
 
     var pets = JSON.parse(data);
 
+    // console.log(pets);
+  if (Number.isNaN(index) || index < 0 || index >= pets.length) {
     console.log(pets);
-  });
+  }
+  console.log(pets[index]);
+});
 }
   else {
   console.error(`Usage: ${node} ${file} [read | create | update | destroy]` );
