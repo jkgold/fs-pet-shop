@@ -8,7 +8,7 @@ var node = path.basename(process.argv[0]);
  // console.log(process.argv[0]);
  var file = path.basename(process.argv[1]);
  var cmd = process.argv[2];
- var index = Number.parseInt(process.argv[3]);
+ var index = process.argv[3];
 
 if( cmd === 'read') {
   fs.readFile(petsPath, 'utf8', function(err, data) {
@@ -17,18 +17,85 @@ if( cmd === 'read') {
     }
 
     var pets = JSON.parse(data);
-
     // console.log(pets);
-  if (Number.isNaN(index) || index < 0 || index >= pets.length) {
-    console.log(pets);
+    if(!index) {
+      console.log(pets);
+    }
+
+  if (pets[index])  {
+    // console.log(pets);
+    console.log(pets[index]);
   }
-  console.log(pets[index]);
+  else if
+  console.error(`Usage: ${node} ${file} read INDEX`);
+   process.exit(1);
+  }
 });
+}
+
 }
   else {
   console.error(`Usage: ${node} ${file} [read | create | update | destroy]` );
    process.exit(1);
 }
+// 'use strict';
+//
+// var fs = require('fs');
+// if (!pet) {
+//   console.error(`Usage: ${node} ${file} ${cmd} PET`);
+//   process.exit(1);
+// }
+// pets.push(pet);
+//
+// var petsJSON = JSON.stringify(pets);
+//
+// fs.writeFile(petsPath, petsJSON, function(writeErr){
+//   if (writeErr) {
+//     throw writeErr;
+//   }
+//   console.log(pet);
+// });
+// });
+// var path = require('path');
+// var petsPath = path.join(__dirname, 'pets.json');
+//
+// var node = path.basename(process.argv[0]);
+//  // console.log(process.argv[0]);
+//  var file = path.basename(process.argv[1]);
+//  var cmd = process.argv[2];
+//  var index = Number.parseInt(process.argv[3]);
+//
+// if( cmd === 'read') {
+//   fs.readFile(petsPath, 'utf8', function(err, data) {
+//     if (err){
+//       throw err;
+//     }
+//
+//     var pets = JSON.parse(data);
+//
+// console.log(pets);
+//   if (Number.isNaN(index) || index < 0 || index >= pets.length) {
+//      console.error(`Usage: ${node} ${file} ${cmd} INDEX`);
+//   }
+//   console.log(pets[index]);
+//   });
+// }
+// else if (cmd ==='create') {
+//   fs.readFile(petsPath, 'utf8', function(readErr, data) {
+//   if (readErr) {
+//     throw readErr;
+//   }
+//
+//   var pets =JSON.parse(data);
+//   var pet = {
+//          age:  process.argv[4],
+//          kind: process.argv[5],
+//         name: process.argv[6],
+//        }
+//   else {
+//   console.error(`Usage: ${node} ${file} [read | create | update | destroy]`);
+//    process.exit(1);
+// }
  // fs.readfile(petsPath, 'utf8', function(err,data) {
 //
 //   if throw err;
