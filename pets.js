@@ -44,7 +44,7 @@ else if
         kind: process.argv[4],
         name: process.argv[5]
       }
-      console.log("HERE'S OUR NEW PET!", pet);
+      // console.log("HERE'S OUR NEW PET!", pet);
 
       // SOMETHING ISN'T WORKING HERE LIKE WE EXPECT
       // if(!pet)  {
@@ -54,13 +54,16 @@ else if
       }
 
       pets.push(pet);
+      var lastPetIndex = pets.length - 1;
       var petsJSON = JSON.stringify(pets);
+      // var petsJSON = pets[lastPetIndex];
+
 
       fs.writeFile(petsPath, petsJSON, function(writeErr){
         if(writeErr){
           throw writeErr;
         }
-        console.log(petsJSON);
+        console.log(pet);
       });
     });
   }
